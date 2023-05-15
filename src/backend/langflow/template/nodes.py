@@ -123,6 +123,13 @@ class MidJourneyPromptChainNode(FrontendNode):
                 multiline=False,
                 name="llm",
             ),
+            TemplateField(
+                field_type="BaseChatMemory",
+                required=False,
+                show=True,
+                name="memory",
+                advanced=False,
+            ),
         ],
     )
     description: str = "MidJourneyPromptChain is a chain you can use to generate new MidJourney prompts."
@@ -149,6 +156,13 @@ class TimeTravelGuideChainNode(FrontendNode):
                 advanced=False,
                 multiline=False,
                 name="llm",
+            ),
+            TemplateField(
+                field_type="BaseChatMemory",
+                required=False,
+                show=True,
+                name="memory",
+                advanced=False,
             ),
         ],
     )

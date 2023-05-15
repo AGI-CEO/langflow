@@ -12,7 +12,7 @@ import { normalCaseToSnakeCase, updateObject, updateTemplate } from "../utils";
 import { alertContext } from "./alertContext";
 import { typesContext } from "./typesContext";
 import { APITemplateType, TemplateVariableType } from "../types/api";
-const { v4: uuidv4 } = require("uuid");
+import { v4 as uuidv4 } from "uuid";
 
 const TabsContextInitialValue: TabsContextType = {
 	save: () => {},
@@ -26,6 +26,8 @@ const TabsContextInitialValue: TabsContextType = {
 	downloadFlow: (flow: FlowType) => {},
 	uploadFlow: () => {},
 	hardReset: () => {},
+	disableCP:false,
+	setDisableCP:(state:boolean)=>{},
 };
 
 export const TabsContext = createContext<TabsContextType>(
@@ -99,7 +101,7 @@ export function TabsProvider({ children }: { children: ReactNode }) {
 		// create a link element and set its properties
 		const link = document.createElement("a");
 		link.href = jsonString;
-		link.download = `${normalCaseToSnakeCase(flows[tabIndex].name)}.json`;
+		link.download = `${flows[tabIndex].name}.json`;
 
 		// simulate a click on the link element to trigger the download
 		link.click();
@@ -212,10 +214,13 @@ export function TabsProvider({ children }: { children: ReactNode }) {
 			return newFlows;
 		});
 	}
+	const [disableCP, setDisableCP] = useState(false);
 
 	return (
 		<TabsContext.Provider
 			value={{
+				disableCP,
+				setDisableCP,
 				save,
 				hardReset,
 				tabIndex,

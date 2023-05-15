@@ -191,7 +191,7 @@ def test_llm_checker_chain(client: TestClient):
         "multiline": False,
         "password": False,
         "name": "llm",
-        "type": "BaseLLM",
+        "type": "BaseLanguageModel",
         "list": False,
         "advanced": False,
     }
@@ -432,6 +432,17 @@ def test_time_travel_guide_chain(client: TestClient):
         "password": False,
         "name": "llm",
         "type": "BaseLanguageModel",
+        "list": False,
+        "advanced": False,
+    }
+    assert template["memory"] == {
+        "required": False,
+        "placeholder": "",
+        "show": True,
+        "multiline": False,
+        "password": False,
+        "name": "memory",
+        "type": "BaseChatMemory",
         "list": False,
         "advanced": False,
     }
